@@ -35,4 +35,4 @@ while True:
     target = target['translateResult'][0][0]['tgt']
 
     print(target)
-    time.sleep(5)
+    #time.sleep(5)

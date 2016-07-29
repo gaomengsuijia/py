@@ -5,18 +5,18 @@ import random
 
 def url_open(url):
     req = urllib.request.Request(url)
-    req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.65 Safari/537.36')
+    req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 6.1; rv:47.0) Gecko/20100101 Firefox/47.0')
 
-    proxies = ['119.6.144.70:81', '111.1.36.9:80', '203.144.144.162:8080']
+    proxies = ['39.84.60.47:8118', '117.64.50.166:8118', '171.39.43.183:8123']
     proxy = random.choice(proxies)
 
     proxy_support = urllib.request.ProxyHandler({'http':proxy})
     opener = urllib.request.build_opener(proxy_support)
     urllib.request.install_opener(opener)
 
-    response = urllib.request.urlopen(url)
+    response = urllib.request.urlopen(req)
     html = response.read()
-
+    print(html)
     return html
 
 
@@ -55,7 +55,7 @@ def save_imgs(folder, img_addrs):
             f.write(img)
 
 
-def download_mm(folder='OOXX', pages=10):
+def download_mm(folder='OOXX', pages=1):
     os.mkdir(folder)
     os.chdir(folder)
 
@@ -65,6 +65,7 @@ def download_mm(folder='OOXX', pages=10):
     for i in range(pages):
         page_num -= i
         page_url = url + 'page-' + str(page_num) + '#comments'
+        print(page_url)
         img_addrs = find_imgs(page_url)
         save_imgs(folder, img_addrs)
 
